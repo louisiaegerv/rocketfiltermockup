@@ -217,7 +217,11 @@ const RealEstateListingsGrid: React.FC = () => {
       if (filters.maxEstimatedValue && property.estimatedValue > Number(filters.maxEstimatedValue)) {
         return false;
       }
-
+        
+      // MLS Status filter
+      if (filters.mlsStatus && property.mlsStatus !== filters.mlsStatus) {
+        return false;
+      }
       // Min Year Built Filter
       if (filters.minYearBuilt && property.yearBuilt < Number(filters.minYearBuilt)) {
         return false;
