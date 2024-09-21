@@ -1,10 +1,8 @@
 // components/FilterSidebar.tsx
 import React, { useState } from 'react';
 
-interface FilterSidebarProps {
-  onClose: () => void;
-  onFilter: (filters: any) => void;
-  currentFilters: {
+
+interface FilterOptions {
     minPrice: string;
     maxPrice: string;
     minEstimatedValue: string;
@@ -14,7 +12,12 @@ interface FilterSidebarProps {
     maxYearBuilt: string;
     minDaysOnMarket: string;
     maxDaysOnMarket: string;
-  }
+}
+
+interface FilterSidebarProps {
+  onClose: () => void;
+  onFilter: (filters: FilterOptions ) => void;
+  currentFilters: FilterOptions;
 }
 
 const FilterSidebar: React.FC<FilterSidebarProps> = ({ onClose, onFilter, currentFilters }) => {

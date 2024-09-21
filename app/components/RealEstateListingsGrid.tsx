@@ -193,7 +193,7 @@ const RealEstateListingsGrid: React.FC = () => {
     return Object.values(filters).filter(value => value !== '').length;
   };
   
-  const handleFilter = (filters: any) => {
+  const handleFilter = (filters: typeof currentFilters ) => {
 
     setCurrentFilters(filters);
     
@@ -203,41 +203,40 @@ const RealEstateListingsGrid: React.FC = () => {
     const filtered = sampleData.filter((property) => {
 
       // Price Filter
-      if (filters.minPrice && property.price < filters.minPrice) {
+      // Max Price Filter
+      if (filters.maxPrice && property.price > Number(filters.maxPrice)) {
         return false;
       }
-      if (filters.maxPrice && property.price > filters.maxPrice) {
+
+      // Min Estimated Value Filter
+      if (filters.minEstimatedValue && property.estimatedValue < Number(filters.minEstimatedValue)) {
         return false;
       }
-      
-      // Estimated Value filter
-    if (filters.minEstimatedValue && property.estimatedValue < filters.minEstimatedValue) {
-      return false;
-    }
-    if (filters.maxEstimatedValue && property.estimatedValue > filters.maxEstimatedValue) {
-      return false;
-    }
 
-    // MLS Status filter
-    if (filters.mlsStatus && property.mlsStatus !== filters.mlsStatus) {
-      return false;
-    }
+      // Max Estimated Value Filter
+      if (filters.maxEstimatedValue && property.estimatedValue > Number(filters.maxEstimatedValue)) {
+        return false;
+      }
 
-    // Year Built filter
-    if (filters.minYearBuilt && property.yearBuilt < filters.minYearBuilt) {
-      return false;
-    }
-    if (filters.maxYearBuilt && property.yearBuilt > filters.maxYearBuilt) {
-      return false;
-    }
+      // Min Year Built Filter
+      if (filters.minYearBuilt && property.yearBuilt < Number(filters.minYearBuilt)) {
+        return false;
+      }
 
-    // Days on Market filter
-    if (filters.minDaysOnMarket && property.daysOnMarket < filters.minDaysOnMarket) {
-      return false;
-    }
-    if (filters.maxDaysOnMarket && property.daysOnMarket > filters.maxDaysOnMarket) {
-      return false;
-    }
+      // Max Year Built Filter
+      if (filters.maxYearBuilt && property.yearBuilt > Number(filters.maxYearBuilt)) {
+        return false;
+      }
+
+      // Min Days on Market Filter
+      if (filters.minDaysOnMarket && property.daysOnMarket < Number(filters.minDaysOnMarket)) {
+        return false;
+      }
+
+      // Max Days on Market Filter
+      if (filters.maxDaysOnMarket && property.daysOnMarket > Number(filters.maxDaysOnMarket)) {
+        return false;
+      }
       
       // ... (add more filter conditions)
       return true;
